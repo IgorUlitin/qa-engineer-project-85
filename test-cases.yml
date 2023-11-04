@@ -1,32 +1,281 @@
 ---
 - summary: |
-    Краткое описание тест-кейса. Пример: Проверка входа пользователя с существующими логином и паролем
+    Проверка регистрации пользователя с помощью валидного заполнения формы
   requirement: |
-    Тестируемое требование. Например: При верном вводе логине и пароля пользователь должен войти в систему
+    При валидном вводе значений в поля формы регистрации пользователь должен войти в систему
   prerequisites: |
-    Это условия, которые необходимы для проведения тест-кейса. Они должны быть выполнены еще до запуска тест-кейса.
-    Например: открыта страница логина
+    Открыта страница регистрации https://codebattle.hexlet.io/users/new?locale=en&next=%2F
   test-data: |
-    Тестовые данные
-    Логин = ilona Пароль = password
+    empty
   steps:
-    - Вводим логин
-    - Вводим пароль
-    - Нажимаем кнопку «Войти»
+    - Вводим валидный "Nickname"
+    - Вводим валидный "Email"
+    - Вводим валидный "Password"
+    - Вводим "Password Confirmation", совпадающий с "Password"
+    - Нажимаем кнопку «Submit»
   expected-result: |
     Пользователь должен попасть на главную страницу
 
 - summary: |
-    Проверка входа пользователя с несуществующими логином и паролем
+    Проверка регистрации пользователя с помощью Github
   requirement: |
-    При неправильном логине или пароле пользователь должен получить сообщение об ошибке
-  prerequisites:
-    Открыта страница логина
+    При регистрации с помощью Github пользователь должен войти в систему под своим аккаунтом Githab
+  prerequisites: |
+    Пользователь должен быть авторизован на Githab https://github.com/
+    Открыта страница регистрации https://codebattle.hexlet.io/users/new?locale=en&next=%2F
   test-data: |
-    Логин = Логин = hexlet Пароль = badpass
+    empty
   steps:
-    - Вводим логин
-    - Вводим пароль
-    - Нажимаем кнопку «Войти»
+    - Нажимаем кнопку «Sign in with Github»
+    - Нажимаем кнопку «Authorize ...»
+  expected-result: |
+    Пользователь должен попасть на главную страницу
+
+- summary: |
+    Проверка регистрации пользователя с помощью Discord
+  requirement: |
+    При регистрации с помощью Discord пользователь должен войти в систему под своим аккаунтом Githab
+  prerequisites: |
+    Пользователь должен быть авторизован на Discord https://discord.com/channels/@me
+    Открыта страница регистрации https://codebattle.hexlet.io/users/new?locale=en&next=%2F
+  test-data: |
+    empty
+  steps:
+    - Нажимаем кнопку «Sign in with Discord»
+    - Нажимаем кнопку «Авторизовать»
+  expected-result: |
+    Пользователь должен попасть на главную страницу
+
+- summary: |
+    Проверка регистрации пользователя с помощью невалидного заполнения формы
+  requirement: |
+    При невалидном вводе значений в поля формы регистрации пользователь должен остаться на странице регистрации
+  prerequisites: |
+    Открыта страница регистрации https://codebattle.hexlet.io/users/new?locale=en&next=%2F
+  test-data: |
+    empty
+  steps:
+    - Вводим невалидный "Nickname"
+    - Вводим невалидный "Email"
+    - Вводим невалидный "Password"
+    - Вводим "Password Confirmation", несовпадающий с "Password"
+    - Нажимаем кнопку «Submit»
+  expected-result: |
+    Пользователь должен остаться на странице регистрации
+
+- summary: |
+    Проверка регистрации существующего пользователя
+  requirement: |
+    При вводе значений существующего пользователя в поля формы регистрации пользователь не должен войти в систему
+  prerequisites: |
+    Открыта страница регистрации https://codebattle.hexlet.io/users/new?locale=en&next=%2F
+  test-data: |
+    Nickname = admin; Email = admin@admin.admin; Password = admin1; Password Confirmation = admin1
+  steps:
+    - Вводим валидный "Nickname"
+    - Вводим валидный "Email"
+    - Вводим валидный "Password"
+    - Вводим "Password Confirmation", совпадающий с "Password"
+    - Нажимаем кнопку «Submit»
+  expected-result: |
+    Пользователь не должен попасть на главную страницу
+
+- summary: |
+    Проверка отображения ошибок валидации при заполнении формы регистрации
+  requirement: |
+    При вводе невалидных значений в поля формы регистрации пользователь должен увидеть ошибки валидации
+  prerequisites: |
+    Открыта страница регистрации https://codebattle.hexlet.io/users/new?locale=en&next=%2F
+  test-data: |
+    Nickname = 1; Email = 1; Password = 1; Password Confirmation = 12
+  steps:
+    - Вводим "Nickname"
+    - Вводим "Email"
+    - Вводим "Password"
+    - Вводим "Password Confirmation"
+    - Нажимаем кнопку «Submit»
+  expected-result: |
+    Пользователь должен увидеть отображение ошибок валидации в полях формы регистрации
+
+- summary: |
+    Проверка отображения ошибок валидации при отсутствии значений в полях формы регистрации
+  requirement: |
+    При отсутствии значений в полях формы регистрации пользователь должен увидеть ошибки валидации
+  prerequisites: |
+    Открыта страница регистрации https://codebattle.hexlet.io/users/new?locale=en&next=%2F
+  test-data: |
+    empty
+  steps:
+    - Нажимаем кнопку «Submit»
+  expected-result: |
+    Пользователь должен увидеть отображение ошибок валидации в полях формы регистрации
+
+- summary: |
+    Проверка регистрации пользователя при вводе минимальных граничных значений
+  requirement: |
+    При вводе минимальных граничных значениях в поля формы регистрации пользователь должен войти в систему
+  prerequisites: |
+    Открыта страница регистрации https://codebattle.hexlet.io/users/new?locale=en&next=%2F
+  test-data: |
+    Nickname = qqq; Email = qq@q.qq; Password = qqqqqq; Password Confirmation = qqqqqq
+  steps:
+    - Вводим "Nickname"
+    - Вводим "Email"
+    - Вводим "Password"
+    - Вводим "Password Confirmation"
+    - Нажимаем кнопку «Submit»
+  expected-result: |
+    Пользователь должен попасть на главную страницу
+
+- summary: |
+    Проверка регистрации пользователя при вводе максимальных граничных значений
+  requirement: |
+    При вводе максимальных граничных значениях в поля формы регистрации пользователь должен войти в систему
+  prerequisites: |
+    Открыта страница регистрации https://codebattle.hexlet.io/users/new?locale=en&next=%2F
+  test-data: |
+    Nickname = qqqqqqqqqqqqqqqq; Email = qq@q.qq; Password = qqqqqqqqqqqqqqqq; Password Confirmation = qqqqqqqqqqqqqqqq
+  steps:
+    - Вводим "Nickname"
+    - Вводим "Email"
+    - Вводим "Password"
+    - Вводим "Password Confirmation"
+    - Нажимаем кнопку «Submit»
+  expected-result: |
+    Пользователь должен попасть на главную страницу
+
+- summary: |
+    Проверка входа пользователя
+  requirement: |
+    При вводе в поля формы авторизации существующий логин и пароль пользователь должен войти в систему
+  prerequisites: |
+    Открыта страница авторизации https://codebattle.hexlet.io/session/new?locale=en&next=%2F
+  test-data: |
+    Email = admin@admin.admin; Password = admin1
+  steps:
+    - Вводим "Email"
+    - Вводим "Password"
+    - Нажимаем кнопку «Submit»
+  expected-result: |
+    Пользователь должен попасть на главную страницу
+
+- summary: |
+    Проверка входа пользователя с несуществующим логином или паролем
+  requirement: |
+    При вводе в поля формы авторизации значений несуществующего логина или пароля пользователь должен получить сообщение об ошибке
+  prerequisites: |
+    Открыта страница авторизации https://codebattle.hexlet.io/session/new?locale=en&next=%2F
+  test-data: |
+    Email = admin@admin.admin; Password = admin1
+  steps:
+    - Вводим "Email"
+    - Вводим "Password"
+    - Нажимаем кнопку «Submit»
+  expected-result: |
+    Пользователь должен получить сообщение об ошибке
+
+- summary: |
+    Проверка отображения ошибок валидации при отсутствии значений в полях формы авторизации
+  requirement: |
+    При отсутствии значений в полях формы авторизации пользователь должен увидеть ошибки валидации
+  prerequisites: |
+    Открыта страница авторизации https://codebattle.hexlet.io/session/new?locale=en&next=%2F
+  test-data: |
+    empty
+  steps:
+    - Нажимаем кнопку «Submit»
+  expected-result: |
+    Пользователь должен увидеть отображение ошибок валидации в полях формы авторизации
+
+- summary: |
+    Проверка перехода на форму регистрации из формы авторизации
+  requirement: |
+    При переходе на форму регистрации из формы авторизации пользователь должен попасть на страницу регистрации
+  prerequisites: |
+    Открыта страница авторизации https://codebattle.hexlet.io/session/new?locale=en&next=%2F
+  test-data: |
+    empty
+  steps:
+    - Нажимаем кнопку «Sign Up», расположенную под формой авторизации
+  expected-result: |
+    Пользователь должен попасть на страницу регистрации
+
+- summary: |
+    Проверка восстановления пароля
+  requirement: |
+    При вводе существующего email пользователь может изменить пароль
+  prerequisites: |
+    Открыта страница авторизации https://codebattle.hexlet.io/session/new?locale=en&next=%2F
+    Открыта почта
+  test-data: |
+    empty
+  steps:
+    - Нажимаем кнопку «Forgot your password?»
+    - Вводим "Email"
+    - Нажимаем кнопку "Submit"
+    - Переходим в почту
+    - Открываем письмо
+    - Переходим по ссылке
+    - Вводим "New password"
+    - Нажимаем кнопку "SAVE"
+    - Переходим на страницу авторизации https://codebattle.hexlet.io/session/new?locale=en&next=%2F
+    - Вводим "Email"
+    - Вводим измененный "Password"
+    - Нажимаем кнопку «Submit»
+  expected-result: |
+    Пароль должен попасть на главную страницу
+
+- summary: |
+    Проверка работы старого пароля после восстановления пароля
+  requirement: |
+    При вводе существующего email пользователь может изменить пароль
+  prerequisites: |
+    Открыта страница авторизации https://codebattle.hexlet.io/session/new?locale=en&next=%2F
+    Открыта почта
+  test-data: |
+    empty
+  steps:
+    - Нажимаем кнопку «Forgot your password?»
+    - Вводим "Email"
+    - Нажимаем кнопку "Submit"
+    - Переходим в почту
+    - Открываем письмо
+    - Переходим по ссылке
+    - Вводим "New password"
+    - Нажимаем кнопку "SAVE"
+    - Переходим на страницу авторизации https://codebattle.hexlet.io/session/new?locale=en&next=%2F
+    - Вводим "Email"
+    - Вводим старый "Password"
+    - Нажимаем кнопку «Submit»
+  expected-result: |
+    Пользователь должен получить сообщение об ошибке
+
+- summary: |
+    Проверка авторизации пользователя с помощью Github
+  requirement: |
+    При авторизации с помощью Github пользователь должен войти в систему под своим аккаунтом Githab
+  prerequisites: |
+    Пользователь должен быть авторизован на Githab https://github.com/
+    Открыта страница авторизации https://codebattle.hexlet.io/session/new?locale=en&next=%2F
+  test-data: |
+    empty
+  steps:
+    - Нажимаем кнопку «Sign in with Github»
+    - Нажимаем кнопку «Authorize ...»
+  expected-result: |
+    Пользователь должен попасть на главную страницу
+
+- summary: |
+    Проверка авторизации пользователя с помощью Discord
+  requirement: |
+    При авторизации с помощью Discord пользователь должен войти в систему под своим аккаунтом Githab
+  prerequisites: |
+    Пользователь должен быть авторизован на Discord https://discord.com/channels/@me
+    Открыта страница авторизации https://codebattle.hexlet.io/session/new?locale=en&next=%2F
+  test-data: |
+    empty
+  steps:
+    - Нажимаем кнопку «Sign in with Discord»
+    - Нажимаем кнопку «Авторизовать»
   expected-result: |
     Пользователь должен попасть на главную страницу
