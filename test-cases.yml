@@ -2,66 +2,49 @@
 - summary: |
     Проверка регистрации пользователя с помощью валидного заполнения формы
   requirement: |
-    При валидном вводе значений в поля формы регистрации пользователь должен войти в систему
+    При валидном вводе значений в поля формы регистрации осуществляется вход в систему под своим аккаунтом
   prerequisites: |
     Открыта страница регистрации https://codebattle.hexlet.io/users/new?locale=en&next=%2F
   test-data: |
-    empty
+    Nickname = <nickname>; Email = <nickname>@gmail.com; Password = <password>; Password Confirmation = <password>
   steps:
-    - Вводим валидный "Nickname"
-    - Вводим валидный "Email"
-    - Вводим валидный "Password"
-    - Вводим "Password Confirmation", совпадающий с "Password"
-    - Нажимаем кнопку «Submit»
+    - Ввести "Nickname"
+    - Ввести "Email"
+    - Ввести "Password"
+    - Ввести "Password Confirmation", совпадающий с "Password"
+    - Нажать кнопку "Submit"
   expected-result: |
-    Пользователь должен попасть на главную страницу
+    Осуществляется переход на главную страницу
 
 - summary: |
     Проверка регистрации пользователя с помощью Github
   requirement: |
-    При регистрации с помощью Github пользователь должен войти в систему под своим аккаунтом Githab
+    При регистрации с помощью Github осуществляется вход в систему под своим аккаунтом Githab
   prerequisites: |
     Пользователь должен быть авторизован на Githab https://github.com/
     Открыта страница регистрации https://codebattle.hexlet.io/users/new?locale=en&next=%2F
   test-data: |
     empty
   steps:
-    - Нажимаем кнопку «Sign in with Github»
-    - Нажимаем кнопку «Authorize ...»
+    - Нажать кнопку "Sign in with Github"
+    - Нажать кнопку "Authorize ..."
   expected-result: |
-    Пользователь должен попасть на главную страницу
+    Осуществляется переход на главную страницу
 
 - summary: |
     Проверка регистрации пользователя с помощью Discord
   requirement: |
-    При регистрации с помощью Discord пользователь должен войти в систему под своим аккаунтом Githab
+    При регистрации с помощью Discord осуществляется вход в систему под своим аккаунтом Discord
   prerequisites: |
     Пользователь должен быть авторизован на Discord https://discord.com/channels/@me
     Открыта страница регистрации https://codebattle.hexlet.io/users/new?locale=en&next=%2F
   test-data: |
     empty
   steps:
-    - Нажимаем кнопку «Sign in with Discord»
-    - Нажимаем кнопку «Авторизовать»
+    - Нажать кнопку "Sign in with Discord"
+    - Нажать кнопку "Авторизовать"
   expected-result: |
-    Пользователь должен попасть на главную страницу
-
-- summary: |
-    Проверка регистрации пользователя с помощью невалидного заполнения формы
-  requirement: |
-    При невалидном вводе значений в поля формы регистрации пользователь должен остаться на странице регистрации
-  prerequisites: |
-    Открыта страница регистрации https://codebattle.hexlet.io/users/new?locale=en&next=%2F
-  test-data: |
-    empty
-  steps:
-    - Вводим невалидный "Nickname"
-    - Вводим невалидный "Email"
-    - Вводим невалидный "Password"
-    - Вводим "Password Confirmation", несовпадающий с "Password"
-    - Нажимаем кнопку «Submit»
-  expected-result: |
-    Пользователь должен остаться на странице регистрации
+    Осуществляется переход на главную страницу
 
 - summary: |
     Проверка регистрации существующего пользователя
@@ -72,183 +55,286 @@
   test-data: |
     Nickname = admin; Email = admin@admin.admin; Password = admin1; Password Confirmation = admin1
   steps:
-    - Вводим валидный "Nickname"
-    - Вводим валидный "Email"
-    - Вводим валидный "Password"
-    - Вводим "Password Confirmation", совпадающий с "Password"
-    - Нажимаем кнопку «Submit»
+    - Ввести "Nickname"
+    - Ввести "Email"
+    - Ввести "Password"
+    - Ввести "Password Confirmation"
+    - Нажать кнопку "Submit"
   expected-result: |
-    Пользователь не должен попасть на главную страницу
+    Вход в систему не осуществляется
 
 - summary: |
-    Проверка отображения ошибок валидации при заполнении формы регистрации
+    Проверка отображения подсвеченного поля "Nickname" и ошибки валидации при невалидном заполнении поля "Nickname" формы регистрации
   requirement: |
-    При вводе невалидных значений в поля формы регистрации пользователь должен увидеть ошибки валидации
+    При вводе невалидных значений в поле "Nickname" формы регистрации пользователь должен увидеть отображение подсвеченного поля "Nickname" и ошибку валидации
   prerequisites: |
     Открыта страница регистрации https://codebattle.hexlet.io/users/new?locale=en&next=%2F
   test-data: |
-    Nickname = 1; Email = 1; Password = 1; Password Confirmation = 12
+    1. Nickname = 1
+    2. Nickname = 1ss
+    3. Nickname = sssssssssssssssss
+    4. Nickname = s!@#$%^&*()_+:"?
+    5. Nickname = <empty>
   steps:
-    - Вводим "Nickname"
-    - Вводим "Email"
-    - Вводим "Password"
-    - Вводим "Password Confirmation"
-    - Нажимаем кнопку «Submit»
+    - Ввести "Nickname" из пункта 1 test-data
+    - Нажать кнопку "Submit"
+    - Проверить отображение ошибки в соответствующем пункте expected-result
+    - Повторить steps для каждого следующего пункта test-data
   expected-result: |
-    Пользователь должен увидеть отображение ошибок валидации в полях формы регистрации
+    Поле "Nickname" подсвечено и отображается ошибка в соответствии с введенными данными:
+      1. Should be from 3 to 16 characters
+      2. Can contain letters, numbers and underscores and should begin with a Latin letter
+      3. Should be from 3 to 16 characters
+      4. Can contain letters, numbers and underscores and should begin with a Latin letter
+      5. Nickname required
 
 - summary: |
-    Проверка отображения ошибок валидации при отсутствии значений в полях формы регистрации
+    Проверка отображения подсвеченного поля "Email" и ошибки валидации при невалидном заполнении поля "Email" формы регистрации
   requirement: |
-    При отсутствии значений в полях формы регистрации пользователь должен увидеть ошибки валидации
+    При вводе невалидных значений в поле "Email" формы регистрации пользователь должен увидеть отображение подсвеченного поля "Email" и ошибку валидации
   prerequisites: |
     Открыта страница регистрации https://codebattle.hexlet.io/users/new?locale=en&next=%2F
   test-data: |
-    empty
+    1. Email = s
+    2. Email = ss@s.s
+    3. Email = ss_@ss.ss
+    4. Email = ssф1@ss.ss
+    5. Email = <empty>
   steps:
-    - Нажимаем кнопку «Submit»
+    - Ввести "Email" из пункта 1 test-data
+    - Нажать кнопку "Submit"
+    - Проверить отображение ошибки в соответствующем пункте expected-result
+    - Повторить steps для каждого следующего пункта test-data
   expected-result: |
-    Пользователь должен увидеть отображение ошибок валидации в полях формы регистрации
+    Поле "Email" подсвечено и отображается ошибка в соответствии с введенными данными:
+      1. Invalid email
+      2. Can't contain special symbols
+      3. Should begin and end with a Latin letter or number
+      4. Can't contain special symbols
+      5. Email required
+
+- summary: |
+    Проверка отображения подсвеченного поля "Password" и ошибки валидации при невалидном заполнении поля "Password" формы регистрации
+  requirement: |
+    При вводе невалидных значений в поле "Password" формы регистрации пользователь должен увидеть отображение подсвеченного поля "Password" и ошибку валидации
+  prerequisites: |
+    Открыта страница регистрации https://codebattle.hexlet.io/users/new?locale=en&next=%2F
+  test-data: |
+    1. Password = sssss
+    2. Password = sssssssssssssssss
+    3. Password = <empty>
+  steps:
+    - Ввести "Password" из пункта 1 test-data
+    - Нажать кнопку "Submit"
+    - Проверить отображение ошибки в соответствующем пункте expected-result
+    - Повторить steps для каждого следующего пункта test-data
+  expected-result: |
+    Поле "Password" подсвечено и отображается ошибка в соответствии с введенными данными:
+      1. Should be from 6 to 16 characters
+      2. Should be from 6 to 16 characters
+      3. Password required
+
+- summary: |
+    Проверка отображения подсвеченного поля "Password Confirmation" и ошибки валидации при невалидном заполнении поля "Password Confirmation" формы регистрации
+  requirement: |
+    При вводе невалидных значений в поле "Password Confirmation" формы регистрации пользователь должен увидеть отображение подсвеченного поля "Password Confirmation" и ошибку валидации
+  prerequisites: |
+    Открыта страница регистрации https://codebattle.hexlet.io/users/new?locale=en&next=%2F
+  test-data: |
+    1. Password = ssssss; Password Confirmation = sssssssssss
+    2. Password = ssssss; Password Confirmation = <empty>
+  steps:
+    - Ввести "Password" из пункта 1 test-data
+    - Ввести "Password Confirmation" из пункта 1 test-data
+    - Нажать кнопку "Submit"
+    - Проверить отображение ошибки в соответствующем пункте expected-result
+    - Повторить steps для каждого следующего пункта test-data
+  expected-result: |
+    Поле "Password Confirmation" подсвечено и отображается ошибка в соответствии с введенными данными:
+      1. Passwords must match
+      2. Confirmation required
 
 - summary: |
     Проверка регистрации пользователя при вводе минимальных граничных значений
   requirement: |
-    При вводе минимальных граничных значениях в поля формы регистрации пользователь должен войти в систему
+    При вводе минимальных граничных значениях в поля формы регистрации осуществляется вход в систему и переход на главную страницу
   prerequisites: |
     Открыта страница регистрации https://codebattle.hexlet.io/users/new?locale=en&next=%2F
   test-data: |
     Nickname = qqq; Email = qq@q.qq; Password = qqqqqq; Password Confirmation = qqqqqq
   steps:
-    - Вводим "Nickname"
-    - Вводим "Email"
-    - Вводим "Password"
-    - Вводим "Password Confirmation"
-    - Нажимаем кнопку «Submit»
+    - Ввести "Nickname"
+    - Ввести "Email"
+    - Ввести "Password"
+    - Ввести "Password Confirmation"
+    - Нажать кнопку «Submit"
   expected-result: |
-    Пользователь должен попасть на главную страницу
+    Осуществляется переход на главную страницу
 
 - summary: |
     Проверка регистрации пользователя при вводе максимальных граничных значений
   requirement: |
-    При вводе максимальных граничных значениях в поля формы регистрации пользователь должен войти в систему
+    При вводе максимальных граничных значениях в поля формы регистрации осуществляется вход в систему и переход на главную страницу
   prerequisites: |
     Открыта страница регистрации https://codebattle.hexlet.io/users/new?locale=en&next=%2F
   test-data: |
     Nickname = qqqqqqqqqqqqqqqq; Email = qq@q.qq; Password = qqqqqqqqqqqqqqqq; Password Confirmation = qqqqqqqqqqqqqqqq
   steps:
-    - Вводим "Nickname"
-    - Вводим "Email"
-    - Вводим "Password"
-    - Вводим "Password Confirmation"
-    - Нажимаем кнопку «Submit»
+    - Ввести "Nickname"
+    - Ввести "Email"
+    - Ввести "Password"
+    - Ввести "Password Confirmation"
+    - Нажать кнопку «Submit"
   expected-result: |
-    Пользователь должен попасть на главную страницу
+    Осуществляется переход на главную страницу
+
+- summary: |
+    Проверка передачи зашифрованных данных на сервер при регистрации пользователя
+  requirement: |
+    При регистрации пользователя данные в ChromeDevTools, передающиеся на сервер, должны быть зашифрованы
+  prerequisites: |
+    Открыта страница регистрации https://codebattle.hexlet.io/users/new?locale=en&next=%2F
+  test-data: |
+    Nickname = <nickname>; Email = <nickname>@gmail.com; Password = <password>; Password Confirmation = <password>
+  steps:
+    - Ввести "Nickname"
+    - Ввести "Email"
+    - Ввести "Password"
+    - Ввести "Password Confirmation"
+    - Открыть ChromeDevTools
+    - Перейти во вкладку Console
+    - Ввести window.addEventListener("beforeunload", function() { debugger; }, false)
+    - Нажать Enter/Return
+    - Перейти во вкладку Network
+    - Очистить запросы
+    - Нажать кнопку "Submit"
+    - Перейти в запрос {i} users
+    - Перейти во вкладку Payload
+  expected-result: |
+    Осуществляется передача данных в зашифрованном виде
+
+- summary: |
+    Проверка замены спецсимволов на мнемоники в форме регистрации
+  requirement: |
+    Сторонний код не выполняется при вводе в поля формы регистрации
+  prerequisites: |
+    Открыта страница авторизации https://codebattle.hexlet.io/session/new?locale=en&next=%2F
+  test-data: |
+    1. Email = <h1>Hello</h1>; Password = <h1>Hello</h1>
+    2. Email = <script>alert('Hello!')</script>; Password = <script>alert('Привет!')</script>
+  steps:
+    - Ввести "Email"
+    - Ввести "Password"
+    - Нажать кнопку "Submit"
+    - Повторить steps для каждого следующего пункта test-data
+  expected-result: |
+    1. Не выполняется сторонний код
+    2. Не выполняется сторонний код
 
 - summary: |
     Проверка входа пользователя
   requirement: |
-    При вводе в поля формы авторизации существующий логин и пароль пользователь должен войти в систему
+    При вводе в поля формы авторизации зарегистрированный email и password осуществляется вход в систему и переход на главную страницу
   prerequisites: |
     Открыта страница авторизации https://codebattle.hexlet.io/session/new?locale=en&next=%2F
   test-data: |
     Email = admin@admin.admin; Password = admin1
   steps:
-    - Вводим "Email"
-    - Вводим "Password"
-    - Нажимаем кнопку «Submit»
+    - Ввести "Email"
+    - Ввести "Password"
+    - Нажать кнопку "Submit"
   expected-result: |
-    Пользователь должен попасть на главную страницу
+    Осуществляется переход на главную страницу
 
 - summary: |
-    Проверка входа пользователя с несуществующим логином или паролем
+    Проверка входа пользователя с незарегистрированным email и password
   requirement: |
-    При вводе в поля формы авторизации значений несуществующего логина или пароля пользователь должен получить сообщение об ошибке
+    При вводе в поля формы авторизации значений незарегистрированного email и password не осуществляется вход в систему и переход на главную страницу
   prerequisites: |
     Открыта страница авторизации https://codebattle.hexlet.io/session/new?locale=en&next=%2F
   test-data: |
     Email = admin@admin.admin; Password = admin1
   steps:
-    - Вводим "Email"
-    - Вводим "Password"
-    - Нажимаем кнопку «Submit»
+    - Ввести "Email"
+    - Ввести "Password"
+    - Нажать кнопку "Submit"
   expected-result: |
-    Пользователь должен получить сообщение об ошибке
-
-- summary: |
-    Проверка отображения ошибок валидации при отсутствии значений в полях формы авторизации
-  requirement: |
-    При отсутствии значений в полях формы авторизации пользователь должен увидеть ошибки валидации
-  prerequisites: |
-    Открыта страница авторизации https://codebattle.hexlet.io/session/new?locale=en&next=%2F
-  test-data: |
-    empty
-  steps:
-    - Нажимаем кнопку «Submit»
-  expected-result: |
-    Пользователь должен увидеть отображение ошибок валидации в полях формы авторизации
+    Не осуществляется переход на главную страницу
 
 - summary: |
     Проверка перехода на форму регистрации из формы авторизации
   requirement: |
-    При переходе на форму регистрации из формы авторизации пользователь должен попасть на страницу регистрации
+    При переходе на форму регистрации из формы авторизации осуществляется переход на страницу регистрации
   prerequisites: |
     Открыта страница авторизации https://codebattle.hexlet.io/session/new?locale=en&next=%2F
   test-data: |
     empty
   steps:
-    - Нажимаем кнопку «Sign Up», расположенную под формой авторизации
+    - Нажать кнопку "Sign Up", расположенную под формой авторизации
   expected-result: |
-    Пользователь должен попасть на страницу регистрации
+    Осуществляется переход на страницу регистрации
 
 - summary: |
     Проверка восстановления пароля
   requirement: |
     При вводе существующего email пользователь может изменить пароль
   prerequisites: |
-    Открыта страница авторизации https://codebattle.hexlet.io/session/new?locale=en&next=%2F
-    Открыта почта
+    Открыта страница регистрации https://codebattle.hexlet.io/users/new?locale=en&next=%2F
+    Открыт email
   test-data: |
-    empty
+    Nickname = <nickname>; Email = <nickname>@gmail.com; Password = <password>; Password Confirmation = <password>
   steps:
-    - Нажимаем кнопку «Forgot your password?»
-    - Вводим "Email"
-    - Нажимаем кнопку "Submit"
-    - Переходим в почту
-    - Открываем письмо
-    - Переходим по ссылке
-    - Вводим "New password"
-    - Нажимаем кнопку "SAVE"
-    - Переходим на страницу авторизации https://codebattle.hexlet.io/session/new?locale=en&next=%2F
-    - Вводим "Email"
-    - Вводим измененный "Password"
-    - Нажимаем кнопку «Submit»
+    - Ввести "Nickname"
+    - Ввести "Email"
+    - Ввести "Password"
+    - Ввести "Password Confirmation", совпадающий с "Password"
+    - Нажать кнопку "Submit"
+    - Перейти на страницу авторизации https://codebattle.hexlet.io/session/new?locale=en&next=%2F
+    - Нажать кнопку «Forgot your password?"
+    - Ввести "Email"
+    - Нажать кнопку "Submit"
+    - Перейти в почту
+    - Открыть письмо
+    - Перейти по ссылке
+    - Ввести "New password"
+    - Нажать кнопку "SAVE"
+    - Перейти на страницу авторизации https://codebattle.hexlet.io/session/new?locale=en&next=%2F
+    - Ввести "Email"
+    - Ввести измененный "Password"
+    - Нажать кнопку "Submit"
   expected-result: |
-    Пароль должен попасть на главную страницу
+    Пароль корректный, осуществляется переход на главную страницу
 
 - summary: |
     Проверка работы старого пароля после восстановления пароля
   requirement: |
-    При вводе существующего email пользователь может изменить пароль
+    При вводе старого пароля после операции восстановления пароля не осуществляется вход в систему и переход на главную страницу
   prerequisites: |
-    Открыта страница авторизации https://codebattle.hexlet.io/session/new?locale=en&next=%2F
+    Открыта страница регистрации https://codebattle.hexlet.io/users/new?locale=en&next=%2F
     Открыта почта
   test-data: |
-    empty
+    Nickname = <nickname>; Email = <nickname>@gmail.com; Password = <password>; Password Confirmation = <password>
   steps:
-    - Нажимаем кнопку «Forgot your password?»
-    - Вводим "Email"
-    - Нажимаем кнопку "Submit"
-    - Переходим в почту
-    - Открываем письмо
-    - Переходим по ссылке
-    - Вводим "New password"
-    - Нажимаем кнопку "SAVE"
-    - Переходим на страницу авторизации https://codebattle.hexlet.io/session/new?locale=en&next=%2F
-    - Вводим "Email"
-    - Вводим старый "Password"
-    - Нажимаем кнопку «Submit»
+    - Ввести "Nickname"
+    - Ввести "Email"
+    - Ввести "Password"
+    - Ввести "Password Confirmation", совпадающий с "Password"
+    - Нажать кнопку "Submit"
+    - Перейти на страницу авторизации https://codebattle.hexlet.io/session/new?locale=en&next=%2F
+    - Нажать кнопку «Forgot your password?"
+    - Ввести "Email"
+    - Нажать кнопку "Submit"
+    - Перейти в почту
+    - Открыть письмо
+    - Перейти по ссылке
+    - Ввести "New password"
+    - Нажать кнопку "SAVE"
+    - Перейти на страницу авторизации https://codebattle.hexlet.io/session/new?locale=en&next=%2F
+    - Ввести "Email"
+    - Ввести старый "Password"
+    - Нажать кнопку "Submit"
   expected-result: |
-    Пользователь должен получить сообщение об ошибке
+    Пароль некорректный, не осуществляется вход в систему и переход на главную страницу
 
 - summary: |
     Проверка авторизации пользователя с помощью Github
@@ -260,8 +346,8 @@
   test-data: |
     empty
   steps:
-    - Нажимаем кнопку «Sign in with Github»
-    - Нажимаем кнопку «Authorize ...»
+    - Нажать кнопку "Sign in with Github"
+    - Нажать кнопку "Authorize ..."
   expected-result: |
     Пользователь должен попасть на главную страницу
 
@@ -275,7 +361,399 @@
   test-data: |
     empty
   steps:
-    - Нажимаем кнопку «Sign in with Discord»
-    - Нажимаем кнопку «Авторизовать»
+    - Нажать кнопку «Sign in with Discord"
+    - Нажать кнопку «Авторизовать"
   expected-result: |
     Пользователь должен попасть на главную страницу
+
+- summary: |
+    Проверка отображения подсвеченного поля "Email" и ошибки валидации при невалидном заполнении поля "Email" формы авторизации
+  requirement: |
+    При вводе невалидных значений в поле "Email" формы авторизации пользователь должен увидеть отображение подсвеченного поля "Email" и ошибку валидации
+  prerequisites: |
+    Открыта страница авторизации https://codebattle.hexlet.io/session/new?locale=en&next=%2F
+  test-data: |
+    1. Email = s
+    2. Email = <empty>
+  steps:
+    - Ввести "Email" из пункта 1 test-data
+    - Нажать кнопку "Submit"
+    - Проверить отображение ошибки в соответствующем пункте expected-result
+    - Повторить steps для каждого следующего пункта test-data
+  expected-result: |
+    Поле "Email" подсвечено и отображается ошибка в соответствии с введенными данными:
+      1. Invalid email
+      2. Email required
+
+- summary: |
+    Проверка отображения подсвеченного поля "Email" и ошибки авторизации при вводе несуществующего email в поле "Email" формы авторизации
+  requirement: |
+    При вводе несуществующего email в поле "Email" формы авторизации пользователь должен увидеть отображение подсвеченного поля "Email" и ошибку авторизации
+  prerequisites: |
+    Открыта страница авторизации https://codebattle.hexlet.io/session/new?locale=en&next=%2F
+  test-data: |
+    1. Email = s
+    2. Email = <empty>
+  steps:
+    - Ввести "Email" из пункта 1 test-data
+    - Нажать кнопку "Submit"
+    - Проверить отображение ошибки в соответствующем пункте expected-result
+    - Повторить steps для каждого следующего пункта test-data
+  expected-result: |
+    Поле "Email" подсвечено и отображается ошибка в соответствии с введенными данными:
+      1. Invalid email
+      2. Email required
+
+- summary: |
+    Проверка отображения подсвеченного поля "Password" и ошибки авторизации при вводе незарегистрированного password в поле "Password" формы авторизации
+  requirement: |
+    При вводе незарегистрированного password в форму авторизации пользователь должен увидеть отображение подсвеченного поля "Password" и ошибку авторизации
+  prerequisites: |
+    Открыта страница авторизации https://codebattle.hexlet.io/session/new?locale=en&next=%2F
+  test-data: |
+    Email = admin@admin.admin; Password = a
+  steps:
+    - Ввести "Email"
+    - Ввести "Password"
+    - Нажать кнопку "Submit"
+  expected-result: |
+    Поле "Password" подсвечено и отображается ошибка "Invalid password"
+
+- summary: |
+    Проверка передачи зашифрованных данных на сервер при входе пользователя
+  requirement: |
+    При авторизации пользователя данные в ChromeDevTools, передающиеся на сервер, должны быть зашифрованы
+  prerequisites: |
+    Открыта страница авторизации https://codebattle.hexlet.io/session/new?locale=en&next=%2F
+  test-data: |
+    Nickname = admin; Email = admin@admin.admin; Password = admin1; Password Confirmation = admin1
+  steps:
+    - Ввести "Email"
+    - Ввести "Password"
+    - Открыть ChromeDevTools
+    - Перейти во вкладку Console
+    - Ввести window.addEventListener("beforeunload", function() { debugger; }, false)
+    - Нажать Enter/Return
+    - Перейти во вкладку Network
+    - Очистить запросы
+    - Нажать кнопку "Submit"
+    - Перейти в запрос {i} session
+    - Перейти во вкладку Payload
+  expected-result: |
+    Осуществляется передача данных в зашифрованном виде
+
+- summary: |
+    Проверка замены спецсимволов на мнемоники в форме авторизации
+  requirement: |
+    Сторонний код не выполняется при вводе в поля формы авторизации
+  prerequisites: |
+    Открыта страница авторизации https://codebattle.hexlet.io/session/new?locale=en&next=%2F
+  test-data: |
+    1. Email = <h1>Hello</h1>; Password = <h1>Hello</h1>
+    2. Email = <script>alert('Hello!')</script>; Password = <script>alert('Привет!')</script>
+  steps:
+    - Ввести "Email"
+    - Ввести "Password"
+    - Нажать кнопку "Submit"
+    - Повторить steps для каждого следующего пункта test-data
+  expected-result: |
+    1. Не выполняется сторонний код
+    2. Не выполняется сторонний код
+
+- summary: |
+    Проверка замены спецсимволов на мнемоники в чате на главной странице
+  requirement: |
+    Сторонний код не выполняется при вводе в чате на главной странице
+  prerequisites: |
+    Открыта страница авторизации https://codebattle.hexlet.io/session/new?locale=en&next=%2F
+  test-data: |
+    Email = admin@admin.admin; Password = admin1
+  steps:
+    - Ввести "Email"
+    - Ввести "Password"
+    - Нажать кнопку "Submit"
+    - Ввести в чате <h1>Hello</h1>; Password = <h1>Hello</h1>
+    - Нажать Enter/Return
+    - Ввести в чате <script>alert('Привет!')</script>
+    - Нажать Enter/Return
+  expected-result: |
+    Не выполняется сторонний код
+
+- summary: |
+    Проверка отображения выбраной задачи при решении задачи против другого пользователя
+  requirement: |
+    При решении задачи против другого пользователя отображается выбранная задача
+  prerequisites: |
+    1. Открыта страница авторизации https://codebattle.hexlet.io/session/new?locale=en&next=%2F в браузере Chrome
+    2. Открыта страница авторизации https://codebattle.hexlet.io/session/new?locale=en&next=%2F в браузере Firefox
+  test-data: |
+    1. Email = admin@admin.admin; Password = admin1; Nickname = admin
+    2. Email = admin1@admin1.admin; Password = admin1; Nickname = admin1
+  steps:
+    - Перейти в браузер Chrome
+    - Ввести "Email" из пункта 1 test-data
+    - Ввести "Password" из пункта 1 test-data
+    - Нажать кнопку "Submit"
+    - Перейти в браузер Firefox
+    - Ввести "Email" из пункта 2 test-data
+    - Ввести "Password" из пункта 2 test-data
+    - Нажать кнопку "Submit"
+    - Нажать кнопку "Create a game"
+    - Во всплывающем окне в фильтре "Level" выбрать значение "1 звезда"
+    - Во всплывающем окне в фильтре "Game Type" выбрать значение "With a friend"
+    - Во всплывающем окне в форме поиска "Choose opponent" ввести значение "Nickname" из пункта 1 test-data
+    - Во всплывающем окне в форме поиска "Choose opponent" выбрать в выпадающем списке значение "Nickname" из пункта 1 test-data
+    - Нажать кнопку "Create invite"
+    - Перейти в браузер Chrome
+    - Нажать кнопку "Invites"
+    - Нажать кнопку "Accept"
+    - Проверить соответствие выбранной задачи в "Choose task by name or tags" реальности
+    - Перейти в браузер Firefox
+    - Проверить соответствие выбранной задачи в "Choose task by name or tags" реальности
+  expected-result: |
+    Отображается выбранная задача
+
+- summary: |
+    Проверка отображение изменений в редакторе кода другого пользователя
+  requirement: |
+    При решении задачи против другого пользователя оба пользователя видят друг у друга изменения в редакторе кода
+  prerequisites: |
+    1. Открыта страница авторизации https://codebattle.hexlet.io/session/new?locale=en&next=%2F в браузере Chrome
+    2. Открыта страница авторизации https://codebattle.hexlet.io/session/new?locale=en&next=%2F в браузере Firefox
+  test-data: |
+    1. Email = admin@admin.admin; Password = admin1; Nickname = admin
+    2. Email = admin1@admin1.admin; Password = admin1; Nickname = admin1
+  steps:
+    - Перейти в браузер Chrome
+    - Ввести "Email" из пункта 1 test-data
+    - Ввести "Password" из пункта 1 test-data
+    - Нажать кнопку "Submit"
+    - Перейти в браузер Firefox
+    - Ввести "Email" из пункта 2 test-data
+    - Ввести "Password" из пункта 2 test-data
+    - Нажать кнопку "Submit"
+    - Нажать кнопку "Create a game"
+    - Во всплывающем окне в фильтре "Level" выбрать значение "1 звезда"
+    - Во всплывающем окне в фильтре "Game Type" выбрать значение "With a friend"
+    - Во всплывающем окне в форме поиска "Choose opponent" ввести значение "admin"
+    - Во всплывающем окне в форме поиска "Choose opponent" ввести значение "Nickname" из пункта 1 test-data
+    - Во всплывающем окне в форме поиска "Choose opponent" выбрать в выпадающем списке значение "Nickname" из пункта 1 test-data
+    - Нажать кнопку "Create invite"
+    - Перейти в браузер Chrome
+    - Нажать кнопку "Invites"
+    - Нажать кнопку "Accept"
+    - Очистить редактор кода слева
+    - Перейти в браузер Firefox
+    - Проверить изменения в редакторе кода пользователя admin
+    - Очистить редактор кода слева
+    - Перейти в браузер Chrome
+    - Проверить изменения в редакторе кода пользователя admin1
+  expected-result: |
+    Отображаются изменения в редакторе кода другого пользователя
+
+- summary: |
+    Проверка возможности изменения языка программирования во время решения задачи против другого пользователя
+  requirement: |
+    При решении задачи против другого пользователя есть возможность переключить язык программирования
+  prerequisites: |
+    1. Открыта страница авторизации https://codebattle.hexlet.io/session/new?locale=en&next=%2F в браузере Chrome
+    2. Открыта страница авторизации https://codebattle.hexlet.io/session/new?locale=en&next=%2F в браузере Firefox
+  test-data: |
+    1. Email = admin@admin.admin; Password = admin1; Nickname = admin
+    2. Email = admin1@admin1.admin; Password = admin1; Nickname = admin1
+  steps:
+    - Перейти в браузер Chrome
+    - Ввести "Email" из пункта 1 test-data
+    - Ввести "Password" из пункта 1 test-data
+    - Нажать кнопку "Submit"
+    - Перейти в браузер Firefox
+    - Ввести "Email" из пункта 2 test-data
+    - Ввести "Password" из пункта 2 test-data
+    - Нажать кнопку "Submit"
+    - Нажать кнопку "Create a game"
+    - Во всплывающем окне в фильтре "Level" выбрать значение "1 звезда"
+    - Во всплывающем окне в фильтре "Game Type" выбрать значение "With a friend"
+    - Во всплывающем окне в форме поиска "Choose opponent" ввести значение "Nickname" из пункта 1 test-data
+    - Во всплывающем окне в форме поиска "Choose opponent" выбрать в выпадающем списке значение "Nickname" из пункта 1 test-data
+    - Нажать кнопку "Create invite"
+    - Перейти в браузер Chrome
+    - Нажать кнопку "Invites"
+    - Нажать кнопку "Accept"
+    - Выбрать любой другой язык программирования в выпадающем списке
+  expected-result: |
+    Выбран другой язык программирования
+
+- summary: |
+    Проверка возможности входа в игру по ссылке-приглашению
+  requirement: |
+    При передаче ссылки-приглашения другому пользователю у него есть возможность подключится к игре
+  prerequisites: |
+    1. Открыта страница авторизации https://codebattle.hexlet.io/session/new?locale=en&next=%2F в браузере Chrome
+    2. Открыта страница авторизации https://codebattle.hexlet.io/session/new?locale=en&next=%2F в браузере Firefox
+  test-data: |
+    1. Email = admin@admin.admin; Password = admin1; Nickname = admin
+    2. Email = admin1@admin1.admin; Password = admin1; Nickname = admin1
+  steps:
+    - Перейти в браузер Chrome
+    - Ввести "Email" из пункта 1 test-data
+    - Ввести "Password" из пункта 1 test-data
+    - Нажать кнопку "Submit"
+    - Перейти в браузер Firefox
+    - Ввести "Email" из пункта 2 test-data
+    - Ввести "Password" из пункта 2 test-data
+    - Нажать кнопку "Submit"
+    - Нажать кнопку "Create a game"
+    - Во всплывающем окне в фильтре "Level" выбрать значение "1 звезда"
+    - Во всплывающем окне в фильтре "Game Type" выбрать значение "With other users"
+    - Во всплывающем окне в форме поиска "Choose opponent" ввести значение "Nickname" из пункта 1 test-data
+    - Во всплывающем окне в форме поиска "Choose opponent" выбрать в выпадающем списке значение "Nickname" из пункта 1 test-data
+    - Нажать кнопку "Create battle"
+    - Нажать кнопку "Copy link" во вкладке "LOBBY" у созданной игры
+    - Перейти в браузер Chrome
+    - Ввести скопированную ссылку в поисковую строку браузера
+    - Нажать Enter/Return
+    - Нажать кнопку "Join"
+  expected-result: |
+    Подключение к игре с другим пользователем
+
+- summary: |
+    Проверка возможности выбора игры по уровню сложности
+  requirement: |
+    При изменении уровня сложности игры, отображаются разные игры
+  prerequisites: |
+    Открыта страница авторизации https://codebattle.hexlet.io/session/new?locale=en&next=%2F в браузере Chrome
+  test-data: |
+    Email = admin@admin.admin; Password = admin1; Nickname = admin
+  steps:
+    - Перейти в браузер Chrome
+    - Ввести "Email" из пункта 1 test-data
+    - Ввести "Password" из пункта 1 test-data
+    - Нажать кнопку "Submit"
+    - Нажать кнопку "Create a game"
+    - Во всплывающем окне в фильтре "Level" выбрать значение "1 звезда"
+    - Во всплывающем окне в форме поиска "Choose task by name or tags" открыть выпадающий список
+    - Запомнить игры
+    - Во всплывающем окне в фильтре "Level" выбрать значение "2 звезды"
+    - Во всплывающем окне в форме поиска "Choose task by name or tags" открыть выпадающий список
+    - Запомнить игры
+    - Во всплывающем окне в фильтре "Level" выбрать значение "3 звезды"
+    - Во всплывающем окне в форме поиска "Choose task by name or tags" открыть выпадающий список
+    - Запомнить игры
+    - Во всплывающем окне в фильтре "Level" выбрать значение "4 звезды"
+    - Во всплывающем окне в форме поиска "Choose task by name or tags" открыть выпадающий список
+    - Запомнить игры
+    - Сравнить игры разных уровней сложности
+  expected-result: |
+    Игры отличаются по уровням сложности
+
+- summary: |
+    Проверка возможности выбора рандомной задачи
+  requirement: |
+    При не выборе задачи во всплывающем окне в форме поиска "Choose task by name or tags" выбирается рандомная задача
+  prerequisites: |
+    Открыта страница авторизации https://codebattle.hexlet.io/session/new?locale=en&next=%2F
+  test-data: |
+    Email = admin@admin.admin; Password = admin1; Nickname = admin
+  steps:
+    - Ввести "Email"
+    - Ввести "Password"
+    - Нажать кнопку "Submit"
+    - Во всплывающем окне в фильтре "Game Type" выбрать значение "With a bot"
+    - Нажать кнопку "Create battle"
+  expected-result: |
+    Отображается игра с рандомно выбранной задачей
+
+- summary: |
+    Проверка возможности изменения языка задачи во время решения задачи против другого пользователя
+  requirement: |
+    При решении задачи против другого пользователя есть возможность переключить язык задачи
+  prerequisites: |
+    1. Открыта страница авторизации https://codebattle.hexlet.io/session/new?locale=en&next=%2F в браузере Chrome
+    2. Открыта страница авторизации https://codebattle.hexlet.io/session/new?locale=en&next=%2F в браузере Firefox
+  test-data: |
+    1. Email = admin@admin.admin; Password = admin1; Nickname = admin
+    2. Email = admin1@admin1.admin; Password = admin1; Nickname = admin1
+  steps:
+    - Перейти в браузер Chrome
+    - Ввести "Email" из пункта 1 test-data
+    - Ввести "Password" из пункта 1 test-data
+    - Нажать кнопку "Submit"
+    - Перейти в браузер Firefox
+    - Ввести "Email" из пункта 2 test-data
+    - Ввести "Password" из пункта 2 test-data
+    - Нажать кнопку "Submit"
+    - Нажать кнопку "Create a game"
+    - Во всплывающем окне в фильтре "Level" выбрать значение "1 звезда"
+    - Во всплывающем окне в фильтре "Game Type" выбрать значение "With a friend"
+    - Во всплывающем окне в форме поиска "Choose opponent" ввести значение "Nickname" из пункта 1 test-data
+    - Во всплывающем окне в форме поиска "Choose opponent" выбрать в выпадающем списке значение "Nickname" из пункта 1 test-data
+    - Нажать кнопку "Create invite"
+    - Перейти в браузер Chrome
+    - Нажать кнопку "Invites"
+    - Нажать кнопку "Accept"
+    - Выбрать другой язык задачи в выпадающем списке
+  expected-result: |
+    Язык задачи изменился на выбранный
+
+- summary: |
+    Проверка возможности отправки сообщения незарегистрированным пользователем в игре
+  requirement: |
+    При игре незарегистрированные пользователи не могут отправлять сообщения
+  prerequisites: |
+    1. Открыта страница авторизации https://codebattle.hexlet.io/session/new?locale=en&next=%2F в браузере Chrome
+    2. Открыт браузер Firefox
+  test-data: |
+    Email = admin@admin.admin; Password = admin1; Nickname = admin
+  steps:
+    - Перейти в браузер Chrome
+    - Ввести "Email" 
+    - Ввести "Password"
+    - Нажать кнопку "Submit"
+    - Нажать кнопку "Create a game"
+    - Нажать кнопку "Create battle"
+    - Скопировать ссылку открытой игры из панели поиска
+    - Перейти в браузер Firefox
+    - Ввести скопированную ссылку в поисковую строку браузера
+    - Ввести сообщение в чате
+    - Нажать Enter/Return
+  expected-result: |
+    Сообщение не отправляется
+
+- summary: |
+    Проверка отображения редактора кода как проигрыватель видео при просмотре завершенной игры
+  requirement: |
+    При просмотре завершенной игры редактор кода выглядит как проигрыватель видео
+  prerequisites: |
+    Открыта страница авторизации https://codebattle.hexlet.io/session/new?locale=en&next=%2F в браузере Chrome
+  test-data: |
+    Email = admin@admin.admin; Password = admin1; Nickname = admin
+  steps:
+    - Перейти в браузер Chrome
+    - Ввести "Email" 
+    - Ввести "Password"
+    - Нажать кнопку "Submit"
+    - Открыть вкладку "Completed Games"
+    - Выбрать рандомную игру
+    - Нажать кнопу "Show"
+  expected-result: |
+    Редактор кода выглядит как проигрыватель
+
+- summary: |
+    Проверка возможности просмотра завершенной игры с помощью проигрывателя редактора кода
+  requirement: |
+    При просмотре завершенной игры редактор запускает видео игры
+  prerequisites: |
+    Открыта страница авторизации https://codebattle.hexlet.io/session/new?locale=en&next=%2F в браузере Chrome
+  test-data: |
+    Email = admin@admin.admin; Password = admin1; Nickname = admin
+  steps:
+    - Перейти в браузер Chrome
+    - Ввести "Email" 
+    - Ввести "Password"
+    - Нажать кнопку "Submit"
+    - Открыть вкладку "Completed Games"
+    - Выбрать рандомную игру
+    - Нажать кнопу "Show"
+    - Нажать кнопку "Play"
+  expected-result: |
+    Запущено видео
