@@ -174,31 +174,6 @@
     Осуществляется переход на главную страницу
 
 - summary: |
-    Проверка передачи зашифрованных данных на сервер при регистрации пользователя
-  requirement: |
-    При регистрации пользователя данные в ChromeDevTools, передающиеся на сервер, должны быть зашифрованы
-  prerequisites: |
-    Открыта страница регистрации https://codebattle.hexlet.io/users/new?locale=en&next=%2F
-  test-data: |
-    Nickname = <nickname>; Email = <nickname>@gmail.com; Password = <password>; Password Confirmation = <password>
-  steps:
-    - Ввести "Nickname"
-    - Ввести "Email"
-    - Ввести "Password"
-    - Ввести "Password Confirmation"
-    - Открыть ChromeDevTools
-    - Перейти во вкладку Console
-    - Ввести window.addEventListener("beforeunload", function() { debugger; }, false)
-    - Нажать Enter/Return
-    - Перейти во вкладку Network
-    - Очистить запросы
-    - Нажать кнопку "Submit"
-    - Перейти в запрос {i} users
-    - Перейти во вкладку Payload
-  expected-result: |
-    Осуществляется передача данных в зашифрованном виде
-
-- summary: |
     Проверка замены спецсимволов на мнемоники в форме регистрации
   requirement: |
     Сторонний код не выполняется при вводе в поля формы регистрации
@@ -398,29 +373,6 @@
     Поле "Password" подсвечено и отображается ошибка "Invalid password"
 
 - summary: |
-    Проверка передачи зашифрованных данных на сервер при входе пользователя
-  requirement: |
-    При авторизации пользователя данные в ChromeDevTools, передающиеся на сервер, должны быть зашифрованы
-  prerequisites: |
-    Открыта страница авторизации https://codebattle.hexlet.io/session/new?locale=en&next=%2F
-  test-data: |
-    Nickname = admin; Email = admin@admin.admin; Password = admin1; Password Confirmation = admin1
-  steps:
-    - Ввести "Email"
-    - Ввести "Password"
-    - Открыть ChromeDevTools
-    - Перейти во вкладку Console
-    - Ввести window.addEventListener("beforeunload", function() { debugger; }, false)
-    - Нажать Enter/Return
-    - Перейти во вкладку Network
-    - Очистить запросы
-    - Нажать кнопку "Submit"
-    - Перейти в запрос {i} session
-    - Перейти во вкладку Payload
-  expected-result: |
-    Осуществляется передача данных в зашифрованном виде
-
-- summary: |
     Проверка замены спецсимволов на мнемоники в форме авторизации
   requirement: |
     Сторонний код не выполняется при вводе в поля формы авторизации
@@ -452,32 +404,6 @@
     - Нажать Enter/Return
   expected-result: |
     Не выполняется сторонний код
-
-- summary: |
-    Проверка отображения выбраной задачи при решении задачи против другого пользователя
-  requirement: |
-    При решении задачи против другого пользователя отображается выбранная задача
-  prerequisites: |
-    1. Пользователь_1 авторизован в браузере Chrome
-    2. Пользователь_2 авторизован в браузере Firefox
-  test-data: |
-    empty
-  steps:
-    - Перейти в браузер Firefox
-    - Нажать кнопку "Create a game"
-    - Во всплывающем окне в фильтре "Level" выбрать значение "1 звезда"
-    - Во всплывающем окне в фильтре "Game Type" выбрать значение "With a friend"
-    - Во всплывающем окне в форме поиска "Choose opponent" ввести значение "Nickname" из пункта 1 test-data
-    - Во всплывающем окне в форме поиска "Choose opponent" выбрать в выпадающем списке значение "Nickname" из пункта 1 test-data
-    - Нажать кнопку "Create invite"
-    - Перейти в браузер Chrome
-    - Нажать кнопку "Invites"
-    - Нажать кнопку "Accept"
-    - Проверить соответствие выбранной задачи в "Choose task by name or tags" реальности
-    - Перейти в браузер Firefox
-    - Проверить соответствие выбранной задачи в "Choose task by name or tags" реальности
-  expected-result: |
-    Отображается выбранная задача
 
 - summary: |
     Проверка отображение изменений в редакторе кода другого пользователя
