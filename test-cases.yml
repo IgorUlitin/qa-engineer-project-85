@@ -604,8 +604,7 @@
 - summary: |
     Проверка изменения очков рейтинга
   requirement: |
-    При прохождении игры изменяются позиции "rank", "elo_rating" "games_played"
-games_played
+    При прохождении игры изменяются позиции "rank", "elo_rating", "games_played"
   prerequisites: |
     Пользователь авторизован
   test-data: |
